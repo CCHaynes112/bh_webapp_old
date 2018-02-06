@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+    <title>BrawlBay.com</title>
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'apitest/css/Mine/Result.css' %}">
+    <script type="text/javascript" src="{% static 'apitest/js/Mine/CallChart.js' %}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">google.charts.load('current', {'packages':['corechart', 'bar']})</script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83277161-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-83277161-1');
+    </script>
+
+    <style type="text/css">
+
+      body {
+        background-image: url({% static 'apitest/img/Backgrounds/Shipwreck_BG.png' %});
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        opacity: 50;
+      }
+
+      footer {
+        background-color: #222222;
+        color: #8c8c8c;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        height: 3%;
+        margin-bottom: 0vw;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <nav id="navBar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"><img src="{% static 'apitest/img/Logo.png' %}"></a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Clans</a></li>
+            <li><a href="/about/">About/Contact</a></li>
+            <li><a href="http://www.brawlhalla.com/rankings/1v1/">LeaderBoards</a></li>
+          </ul>
+          <form id="searchFormHead" class="form-group searchForm" action="/result/" method="POST">
+            {% csrf_token %}
+            <ul style="list-style-type: none;">
+              <li><input class="form-control" name="ident" type="text" placeholder="Search Player"></li>
+              <li><input class="button" type="submit" value="Submit"></li>
+            </ul>
+          </form> 
+        </div>
+      </div>
+    </nav>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+    <div id="theContain" class="container-fluid" style="padding-left: 0.25vw; padding-right: 0.25vw; padding-top: 7em; background-color: rgba(34, 34, 34, 0.5);">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <footer>
+      <div class="container-fluid">
+        <div>
+          <p style="float: left;">Email: CCHaynes1122@gmail.com</p>
+          <p style="float: right;"">Designed and Developed by Curtis Haynes</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+</html>

@@ -1,0 +1,77 @@
+{% extends "apitest/Header.html" %}
+{% load static %}
+
+{% block content %}
+
+<div id="legendsPanel1" class="container-fluid panelClass">
+	<h3 style="text-align: center;"><b>LEGENDS:</b></h3>
+	<form id="portraitRow1" class="row" style="margin: auto;" method="POST">
+		{% csrf_token %}
+		<input class="col-xs-1 portrait" type="image" name="port" value="3" src="{% static 'apitest/img/Portraits/3.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/4.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/5.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/6.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/7.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/8.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/9.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/10.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/11.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/12.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/13.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/14.png' %}" />
+	</form>
+	<div id="portraitRow2" class="row" style="margin: auto;">
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/15.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/16.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/18.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/19.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/20.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/21.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/22.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/23.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/24.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/25.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/26.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/28.png' %}" />
+	</div>
+	<div id="portraitRow3" class="row" style="margin: auto;">
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/29.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/30.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/31.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/32.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/33.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/35.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/36.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/37.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/38.png' %}" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/Error.png' %}" style="display: none;" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/Error.png' %}" style="display: none;" />
+		<input class="col-xs-1 portrait" type="image" src="{% static 'apitest/img/Portraits/Error.png' %}" style="display: none;" />
+	</div>
+</div>
+
+<script type="text/javascript">
+	//TESTING, IN DEV
+	$(function() {
+	    $("#portraitRow1").submit(function(event) {
+	    	console.log("POST SUBMITTED1")
+	        event.preventDefault();
+	        var portraitForm = $(this);
+	        var posting = $.post( portraitForm.attr('action'), portraitForm.serialize() );
+	        posting.done(function(data) {
+	            console.log("POST SUBMITTED2");
+	        });
+	    });
+	});
+
+	$(document).ready(function() {
+		$('.portrait').click(function() {
+			console.log("Portrait was clicked");
+			var ggg = 'View: ' + '{{ time_series_legend_id | escapejs }}'
+			console.log(ggg);
+		})
+	})
+
+</script>
+
+{% endblock %}

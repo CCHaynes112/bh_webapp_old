@@ -1,0 +1,318 @@
+{% extends "apitest/Header.html" %}
+{% load static %}
+
+{% block content %}
+	<div id="containerID" class="container-fluid panelClass">
+		<div id="name"></div>
+		<div id="ident"></div>
+	</div> 
+
+	<div class="container-fluid">
+		<div class="row" style="padding: 1vw;">
+			<div id="panel1" class="col-sm-6 container-fluid panelClass">
+				<div>
+					<h2><b><u>Overall Stats:</u></b></h2>
+					<h4 id="level"></h4>
+					<h3>Overall Win-Loss:</h3>
+				</div>
+				<div id="WLchart" class="container-fluid"></div>
+				<div id="mpBio" class="row">
+					<h3>Most Played Legends:</h3>
+					<div id="mp1" class="col-sm-6">
+						<!--Most Played 1-->
+						<div id="mpData1"></div>
+					</div>
+
+					<div id="mp2" class="col-sm-6">
+						<!--Most Played 2-->
+						<div id="mpData2"></div>
+					</div>
+				</div>
+				<div class="row">
+					<br>
+					<h5> Most Played Win-Loss</h5>
+					<div id="mp1" class="col-sm-6">
+						<div id="mpWinRate1"></div>
+						<div id="mpDamage1"></div>
+						<div id="mpDamageType1"></div>
+					</div>
+
+					<div id="mp2" class="col-sm-6">
+						<div id="mpWinRate2"></div>
+						<div id="mpDamage2"></div>
+						<div id="mpDamageType2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+
+				<div id="panel3" class="container-fluid panelClass">
+					<!--Ranked Info: -->
+					<div>
+						<h2><b><u>Current Season:</u></b></h2>
+						<h3>1v1</h3>
+					</div>
+					<div id="rankedImgDiv"></div>
+					<div id="rankedInfoDiv"></div>
+					<hr>
+					<div id="ranked2v2Div">
+						<h3>2v2</h3>
+						<div id="ranked2v2InfoDiv"></div>
+					</div>
+				</div>
+
+				<div id="panel2" class="container-fluid panelClass">
+					<div class="dropdown">
+						<h2 style="text-align: center;"><b><u>Legend Stats:</u></b></h2>
+						<button id="ddMenu" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Legends
+						<span class="caret"></span></button>
+						<ul id="legendListDD" class="dropdown-menu" style="background-color: #222222;">
+						<!--Legend List-->
+						</ul>
+					</div> 
+					<div id="legendPanel">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		//Import JSON:~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		var playerJson = JSON.parse('{{ time_series_player_json_string | escapejs }}');
+		var rankedJson = JSON.parse('{{ time_series_ranked_json_string | escapejs }}');
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//Obtain most played legends by matchtime~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		var legendList = playerJson.legends;
+		var mpLegends = {
+			matchTime1: 0,
+			matchTime2: 0,
+			mpLegend1: null,
+			mpLegend2: null
+		};
+
+		legendList.sort(function(a, b) {
+			return b.matchtime - a.matchtime;
+		});
+
+		mpLegends.mpLegend1 = legendList[0];
+		mpLegends.mpLegend2 = legendList[1];
+		mpLegends.matchTime1 = legendList[0].matchtime;
+		mpLegends.matchTime2 = legendList[1].matchtime;
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		//Populate overall data fields by ID~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		document.getElementById("ident").innerHTML = 'ID: ' + playerJson.brawlhalla_id;
+		document.getElementById("name").innerHTML = "<b>" + playerJson.name + "</b>";
+		document.getElementById("level").innerHTML = 'level: ' + playerJson.level;
+		//Mostplayed Fields~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//Pull Images:
+		var img1 = new Image(); 
+		img1.src = "/static/apitest/img/legends/" + mpLegends.mpLegend1.legend_id + ".png";
+
+		document.getElementById('mp1').appendChild(img1);
+		
+		var img2 = new Image(); 
+		img2.src = "/static/apitest/img/legends/" + mpLegends.mpLegend2.legend_id + ".png";
+
+		document.getElementById('mp2').appendChild(img2);
+
+		//Most played descrips:
+		//Convert time to hrs and mins:
+		function convertTime(time)
+		{
+			time = time / 60 / 60;
+			time = time.toPrecision(4);
+
+			ind = time.indexOf(".");
+			var hr = time.substring(0, ind);
+
+			var min = time.substring(ind, time.length);
+			min = (60 * min).toPrecision(2);
+
+			return mpPlayTime1 = hr + "h " + min + "m";
+		}
+
+		//Insert info into descrip
+		document.getElementById('mpData1').innerHTML = '<h3>' + mpLegends.mpLegend1.legend_name_key + '</h3> <h4>Level: ' + mpLegends.mpLegend1.level + '</h4> <p>Playtime: ' + convertTime(mpLegends.mpLegend1.matchtime) + '<br>Total Games: ' + mpLegends.mpLegend1.games + '<br> Games Won: ' + mpLegends.mpLegend1.wins + '<br> Games Lost: ' + (mpLegends.mpLegend1.games - mpLegends.mpLegend1.wins) + '<br> Suicides: ' + mpLegends.mpLegend1.suicides + '</p>';
+
+		document.getElementById('mpData2').innerHTML = '<h3>' + mpLegends.mpLegend2.legend_name_key + '</h3> <h4>Level: ' + mpLegends.mpLegend2.level + '</h4> <p>Playtime: ' + convertTime(mpLegends.mpLegend2.matchtime) + '<br>Total Games: ' + mpLegends.mpLegend2.games + '<br> Games Won: ' + mpLegends.mpLegend2.wins + '<br> Games Lost: ' + (mpLegends.mpLegend2.games - mpLegends.mpLegend2.wins) + '<br> Suicides: ' + mpLegends.mpLegend2.suicides + '</p>';
+
+		//Create Google Charts~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		createWinLossPie(playerJson.wins, (playerJson.games - playerJson.wins), 'WLchart', false);
+
+		createWinLossPie(mpLegends.mpLegend1.wins, (mpLegends.mpLegend1.games -  mpLegends.mpLegend1.wins), 'mpWinRate1', false);
+		createWinLossPie(mpLegends.mpLegend2.wins, (mpLegends.mpLegend2.games - mpLegends.mpLegend2.wins), 'mpWinRate2', false);
+
+		createDamageBar(parseInt(mpLegends.mpLegend1.damagedealt), parseInt(mpLegends.mpLegend1.damagetaken), 'mpDamage1', false);
+		createDamageBar(parseInt(mpLegends.mpLegend2.damagedealt), parseInt(mpLegends.mpLegend2.damagetaken), 'mpDamage2', false);
+
+		createDamageDonut(parseInt(mpLegends.mpLegend1.damageunarmed), parseInt(mpLegends.mpLegend1.damageweaponone), parseInt(mpLegends.mpLegend1.damageweapontwo), parseInt(mpLegends.mpLegend1.damagethrownitem), parseInt(mpLegends.mpLegend1.damagegadgets), 'mpDamageType1', false);
+		createDamageDonut(parseInt(mpLegends.mpLegend2.damageunarmed), parseInt(mpLegends.mpLegend2.damageweaponone), parseInt(mpLegends.mpLegend2.damageweapontwo), parseInt(mpLegends.mpLegend2.damagethrownitem), parseInt(mpLegends.mpLegend2.damagegadgets), 'mpDamageType2', false);
+
+		//Dropdown Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		$(document).ready(function()
+		{
+			containList.forEach(function(element, index) {
+				$("#legend" + index).click(function() {
+					for(var i = 0; i < containList.length; i++)
+					{
+						if(i < index || i > index)
+						{
+							$('#legendContain' + i + ' .graphClass').hide();
+						}
+						$('#legendContain' + index + ' .graphClass').show();
+					}
+				});
+			})
+		})
+		//Populate legend list~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		var containList = [];
+
+		df1 = new DocumentFragment();
+
+		for(var i = 0; i <= playerJson.legends.length-1; i++)
+		{
+			var legendListDDVar = document.getElementById("legendListDD");
+			var createLi = document.createElement("li");
+			var createA = document.createElement("a");
+			var theText = document.createTextNode(playerJson.legends[i].legend_name_key);
+
+			legendListDDVar.appendChild(createLi);
+			legendListDDVar.setAttribute("style", "opacity: 100;")
+			createLi.appendChild(createA);
+			createA.setAttribute("id", ("legend" + i));
+			createA.appendChild(theText);
+
+			//Create Legend Div Info~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			var legPanel = document.getElementById("legendPanel");
+
+			//Create Legend Container
+			var legendContainer = document.createElement("div");
+			legendContainer.setAttribute("id", ("legendContain" + i));
+			legendContainer.setAttribute("class", "container-fluid graphClass");
+			df1.appendChild(legendContainer);
+
+			//Create Legend Name Div
+			var legendNameTempDiv = document.createElement("div");
+
+			legendNameTempDiv.innerHTML = '<h3>' + playerJson.legends[i].legend_name_key + '</h3> <h4>Level: ' + playerJson.legends[i].level + '</h4> <p>Playtime: ' + convertTime(playerJson.legends[i].matchtime) + '<br>Total Games: ' + playerJson.legends[i].games + '<br> Games Won: ' + playerJson.legends[i].wins + '<br> Games Lost: ' + (playerJson.legends[i].games - playerJson.legends[i].wins) + '<br> Suicides: ' + playerJson.legends[i].suicides + '</p>';
+
+			legendNameTempDiv.setAttribute("style", "color: #8c8c8c; display: none; text-align: center;")
+			legendNameTempDiv.setAttribute("class", "graphClass");
+			legendContainer.appendChild(legendNameTempDiv);
+
+			//Create Legend Row Chart Div
+			var legendChartTempDiv = document.createElement("div");
+			legendChartTempDiv.setAttribute("id", ("legendChartDiv" + i));
+			legendChartTempDiv.setAttribute("class", "row graphClass");
+			legendContainer.appendChild(legendChartTempDiv);
+
+			//Create Col 1
+			var legendChartTempRow1 = document.createElement("div");
+			legendChartTempRow1.setAttribute("class", "col-sm-4 graphClass");
+			legendChartTempDiv.appendChild(legendChartTempRow1);
+
+			//Create Col 2
+			var legendChartTempRow2 = document.createElement("div");
+			legendChartTempRow2.setAttribute("class", "col-sm-4 graphClass");
+			legendChartTempDiv.appendChild(legendChartTempRow2);
+
+			//Create Col 3
+			var legendChartTempRow3 = document.createElement("div");
+			legendChartTempRow3.setAttribute("class", "col-sm-4 graphClass");
+			legendChartTempDiv.appendChild(legendChartTempRow3);
+
+			var rowDiv1 = document.createElement("div");
+			rowDiv1.setAttribute("id", ("legendChartRow1" + i));
+			rowDiv1.setAttribute("class", "graphClass");
+			legendChartTempRow1.appendChild(rowDiv1);
+
+			var rowDiv2 = document.createElement("div");
+			rowDiv2.setAttribute("id", ("legendChartRow2" + i));
+			rowDiv2.setAttribute("class", "graphClass");
+			legendChartTempRow2.appendChild(rowDiv2);
+
+			var rowDiv3 = document.createElement("div");
+			rowDiv3.setAttribute("id", ("legendChartRow3" + i));
+			rowDiv3.setAttribute("class", "graphClass");
+			legendChartTempRow3.appendChild(rowDiv3);
+
+			//Create Charts
+			createWinLossPie(playerJson.legends[i].wins, (playerJson.legends[i].games-playerJson.legends[i].wins), "legendChartRow1" + i, true);
+
+			createDamageBar(parseInt(playerJson.legends[i].damagedealt), parseInt(playerJson.legends[i].damagetaken), 'legendChartRow2' + i, true);
+
+			createDamageDonut(parseInt(playerJson.legends[i].damageunarmed), parseInt(playerJson.legends[i].damageweaponone), parseInt(playerJson.legends[i].damageweapontwo), parseInt(playerJson.legends[i].damagethrownitem), parseInt(playerJson.legends[i].damagegadgets), 'legendChartRow3' + i, true);
+
+			containList.push(legendContainer);
+		}
+
+		legendPanel.appendChild(df1);
+
+		//Ranked Information~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//Pull Images:
+		function getTier(t)
+		{
+			if(t.indexOf(" ") != -1)
+			{
+				var indexOfRankSpace = t.indexOf(" ");
+				t = t.substring(0, indexOfRankSpace);
+			}
+			return t;
+		}
+
+		if(rankedJson.brawlhalla_id != undefined)
+		{
+			overallTier = getTier(rankedJson.tier);
+
+			var rankedImg1 = new Image(); 
+			rankedImg1.src = "/static/apitest/img/Rankings/" + overallTier + ".png";
+			rankedImg1.style.width = '10vw';
+
+			document.getElementById('rankedImgDiv').appendChild(rankedImg1);
+
+			document.getElementById('rankedInfoDiv').innerHTML = '<p>Region: ' + rankedJson.region + '<br>' + rankedJson.tier + '<br>Peak Rating: ' + rankedJson.peak_rating + '<br>Current Rating: ' + rankedJson.rating + '<br>Games: ' + rankedJson.games + '<br>Wins: ' + rankedJson.wins + '<br>Losses: ' + (rankedJson.games - rankedJson.wins) + '</p>';
+		
+
+			for(var i = 0; i <= rankedJson["2v2"].length-1; i++)
+			{
+				//ranked2v2InfoDiv
+				var ranked2v2TempDiv = document.createElement("div");
+				ranked2v2TempDiv.setAttribute("id", ("ranked2v2Div" + i))
+				ranked2v2TempDiv.setAttribute("class", "row");
+				document.getElementById("ranked2v2InfoDiv").appendChild(ranked2v2TempDiv);
+				ranked2v2TempDiv.setAttribute("style", "padding-bottom: 3vw;")
+
+				//Get ranked 2v2 partner's name
+				var ranked2v2Partner = rankedJson["2v2"][i].teamname;
+				ranked2v2TempDiv.innerHTML = "<h4>" + ranked2v2Partner + "</h4>";
+
+				//Ranked 2v2 columns
+				var ranked2v2Col1 = document.createElement("div");
+				ranked2v2Col1.setAttribute("id", ("ranked2v2Col1" + i));
+				ranked2v2Col1.setAttribute("class", "col-sm-6");
+				ranked2v2TempDiv.appendChild(ranked2v2Col1);
+
+				var ranked2v2Col2 = document.createElement("div");
+				ranked2v2Col2.setAttribute("id", ("ranked2v2Col2" + i));
+				ranked2v2Col2.setAttribute("class", "col-sm-6");
+				ranked2v2TempDiv.appendChild(ranked2v2Col2);
+				ranked2v2Col2.setAttribute("style", "text-align: center;");
+
+				//Ranked 2v2 Images
+				ranked2v2Tier = getTier(rankedJson["2v2"][i].tier);
+				var ranked2v2ImgTemp = new Image();
+				ranked2v2ImgTemp.src = "/static/apitest/img/Rankings/" + ranked2v2Tier + ".png";
+				ranked2v2Col1.appendChild(ranked2v2ImgTemp);
+				ranked2v2ImgTemp.style.width = '8vw';
+
+				//Ranked 2v2 Data
+				ranked2v2Col2.innerHTML = "<p>" + rankedJson["2v2"][i].tier + "<br>Peak Rating: " + rankedJson["2v2"][i].peak_rating + "<br>Current Rating: " + rankedJson["2v2"][i].rating + "<br>Games: " + rankedJson["2v2"][i].games + "<br>Wins: " + rankedJson["2v2"][i].wins + "<br>Losses: " + (rankedJson["2v2"][i].games - rankedJson["2v2"][i].wins) + "</p>";
+			}
+		}
+	</script>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+ ×{% extends "apitest/Header.html" %}
+{% load static %}
+
+{% block content %}
+
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	</head>
+
+	<div id="fullContain">
+		<div id="homePanel1" class="container-fluid">
+			<div id="logoNameDiv">
+				<img src="{% static 'apitest/img/HomeName.png' %}">
+			</div>
+
+			<div id="homeDescrip">
+				<h2><b>ANALYZE YOUR GAMEPLAY</b></h2>
+				<b>HOW TO SEARCH</b>
+				<br>
+				<p>To search, enter your Brawlhalla ID:<br>(Ex: '127197' or '2')<br>Searching by Steam ID or name is under development</p>
+			</div>
+
+			<div id="searchFormHome" class="searchForm">
+				<form class="form-group" action="/result/" method="POST">
+					{% csrf_token %}
+					<label for="ident">Name or ID:</label>
+					<input class="form-control" name="ident" type="text">
+					<br>
+					<input class="button" type="submit" value="Submit">
+				</form> 
+			</div>
+		</div>
+		
+		<div id="homeRow1">
+			<div id="homeRow1Heading">
+				<p>Top 3 Global Players:</p>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<div>
+						<h3>#1</h3>
+					</div>
+					<div class="row">
+						<div id="img1" class="col-xs-6"></div>
+						<div id="r1" class="col-xs-6"></div>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div>
+						<h3>#2</h3>
+					</div>
+					<div class="row">
+						<div id="img2" class="col-xs-6"></div>
+						<div id="r2" class="col-xs-6"></div>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div>
+						<h3>#3</h3>
+					</div>
+					<div class="row">
+						<div id="img3" class="col-xs-6"></div>
+						<div id="r3" class="col-xs-6"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner">
+					<!-- KEEP IMAGES AT 1220X350 -->
+					<div class="item active">
+						<a href="http://www.brawlhalla.com/news/brawlhalla-patch-2-80/"><img src="/static/apitest/img/Banner/News1.png" alt="News1" style="width:100%;"></a>
+					</div>
+
+					<div class="item">
+						<a href="http://www.brawlhalla.com/news/brawlhalla-patch-2-79/"><img src="/static/apitest/img/Banner/News2.png" alt="News2" style="width:100%;"></a>
+					</div>
+
+					<!--<div class="item">
+						<img src="/static/apitest/img/Banner/News3.png" alt="News3" style="width:100%;">
+					</div>-->
+				</div>
+
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	
+
+	<script type="text/javascript">
+		var top3Json = JSON.parse('{{ time_series_top3_json_string | escapejs }}');
+		console.log(top3Json[0].name);
+
+		document.getElementById("r1").innerHTML += top3Json[0].name;
+		document.getElementById("r2").innerHTML += top3Json[1].name;
+		document.getElementById("r3").innerHTML += top3Json[2].name;
+
+		for(var i = 0; i < 3; i++)
+		{
+			var img1 = new Image(); 
+			img1.src = "/static/apitest/img/legends/" + top3Json[i].best_legend + ".png";
+			console.log('r' + (i + 1));
+			document.getElementById('img' + (i + 1)).appendChild(img1);
+		}
+
+	</script>
+{% endblock %}

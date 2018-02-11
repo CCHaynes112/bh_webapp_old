@@ -68,7 +68,7 @@
             <li><a href="/about/">About/Contact</a></li>
             <li><a href="http://www.brawlhalla.com/rankings/1v1/">LeaderBoards</a></li>
           </ul>
-          <form id="searchFormHead" class="form-group searchForm" action="/result/" method="POST">
+          <form id="searchFormHead" class="form-group searchForm" action="/result/" method="GET">
             {% csrf_token %}
             <ul style="list-style-type: none;">
               <li><input class="form-control" name="ident" type="text" placeholder="Search Player"></li>
@@ -89,8 +89,7 @@
     <footer>
       <div class="container-fluid">
         <div>
-          <p style="float: left;">Email: CCHaynes1122@gmail.com</p>
-          <p style="float: right;"">Designed and Developed by Curtis Haynes</p>
+          <a href="http://www.curtishaynes.net/"><p style="float: right;"">Designed and Developed by Curtis Haynes</p></a>
         </div>
       </div>
     </footer>

@@ -20,9 +20,9 @@ def index(request):
 	return render(request, 'apitest/Home.html', context)
 
 def result(request):	
-	if(request.method == 'POST'):
+	if(request.method == 'GET'):
 		try:
-			usr_input = request.POST.get('ident')
+			usr_input = request.GET.get('ident')
 
 			usr_input = requests.get('https://api.brawlhalla.com/rankings/1v1/all/1?api_key=' + api_key + '&name=' + str(usr_input))
 			rankingsDict = usr_input.json()
@@ -45,7 +45,7 @@ def result(request):
 			return HttpResponse("No such player")
 
 	else:
-		return HttpResponse("Requests wasn't POST")
+		return HttpResponse("Failed to load page")
 
 def legends(request):
 

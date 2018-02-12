@@ -2,19 +2,17 @@
 import os
 import sys
 
-sys.path.insert(0, '/home/django/django_project')
-from secret_keys import secret_key
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+sys.path.insert(0, BASE_DIR)
+from secret_keys import secret_key
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
-TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ("brawlbay.com", "www.brawlbay.com")
 
@@ -50,7 +48,7 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/django/django_project/db/db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -71,5 +69,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = '/home/django/django_project/django_project/static/'
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+STATIC_ROOT = BASE_DIR + '/django_project/static/'
 STATIC_URL = '/static/'

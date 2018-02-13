@@ -84,5 +84,5 @@ TEMPLATES = [
     },
 ]
 
-STATIC_ROOT = BASE_DIR + '/django_project/static/'
+STATIC_ROOT = BASE_DIR + '/django_project/static'
 STATIC_URL = '/static/'

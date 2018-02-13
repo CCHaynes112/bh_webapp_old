@@ -1,0 +1,349 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GLOBAL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.panelClass {
+	background-color: #222222;
+	color: #8c8c8c;
+	opacity: 0.9;
+	border: ridge;
+	border-color: black;
+	border-width: 2px;
+	box-shadow: 3px 3px 3px #222222;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~HEADER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.navbar-brand, .navbar-nav li a {
+    line-height: 5em;
+    height: 4em;
+    padding-top: 0;
+}
+
+.navbar-brand img {
+	padding-top: 0.5em;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Home Page CSS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#fullContain {
+	background-color: rgba(34, 34, 34, 0.9);
+	color: #8c8c8c;
+	border: ridge;
+	border-color: black;
+	border-width: 2px;
+	box-shadow: 3px 3px 3px #222222;
+	margin-left: 13vw;
+	margin-right: 13vw;
+	margin-bottom: 1vw;
+	padding: 0.5vw;
+}
+
+#homePanel1 {
+	color: #8c8c8c;
+	border: ridge;
+	border-color: black;
+	border-width: 2px;
+	box-shadow: 3px 3px 3px #222222;
+	margin-bottom: 1vw;
+	height: 100%;
+	text-align: center;
+	padding: 0vw;
+}
+
+#logoNameDiv {
+	padding-left: 0vw;
+	padding-right: 0px;
+}
+
+#logoNameDiv img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+#homeDescrip {
+	padding-top: 1vw;
+	margin-left: 20vw;
+	margin-right: 20vw;
+	font-size: 120%;
+}
+
+#searchFormHome {
+	padding-top: 2vw;
+	width: 20vw;
+	margin: 0 auto;
+}
+
+#searchFormHead {
+	float: right;
+	padding-top: 0.5em;
+}
+
+.searchForm {
+	border: none;
+	color: #8c8c8c;
+}
+
+.searchForm input {
+	background-color: #222222;
+}
+
+.searchForm li {
+	display: inline-block;
+}
+
+.searchForm .button {
+    background-color: #01213A;
+    color: #8c8c8c;
+    padding: 0.5vw 1vw;
+    text-align: center;
+    font-size: 1.2em;
+    border: ridge;
+	border-color: black;
+	border-width: 2px;
+	transition: color 0.5s;
+	transition: background-color 0.5s;
+}
+
+.searchForm .button:hover {
+	background-color: #023a64;
+	color: #a6a6a6;
+}
+
+#homeRow1, #homeRow2 {
+	margin-bottom: 1vw;
+}
+
+#homeRow1Heading {
+	height: 3vw;
+	background-color: #01213A;
+	color: #8c8c8c;
+	opacity: 0.9;
+	border: ridge;
+	border-color: black;
+	border-width: 2px;
+	box-shadow: 3px 3px 3px #222222;
+	font-size: 2vw;
+	text-align: center;
+	border-bottom: none;
+}
+
+#homeRow1 .row, #homeRow2 .row {
+	margin-left: 0vw;
+	margin-right: 0vw;
+}
+
+#homeRow1 .col-xs-4, #homeRow2 .col-xs-4 {
+	background-color: rgba(34, 34, 34, 0.8);
+	color: #8c8c8c;
+	border: solid;
+	border-color: #8c8c8c;
+	border-width: 0.5px;
+	box-shadow: 3px 3px 3px #222222;
+	transition: background-color 0.3s;
+	padding: 0.5vw;
+}
+
+#homeRow1 .col-xs-4:hover {
+	background-color: rgba(34, 34, 34, 1);
+	filter: grayscale(0%);
+}
+
+#homeRow2 .col-xs-4:hover {
+	background-color: rgba(34, 34, 34, 1);
+	filter: grayscale(0%);
+}
+
+#homeRow1 h3, #homeRow2 h3 {
+	text-align: center;
+	margin-top: 0vw;
+	padding: 0.5vw;
+	border-style: solid;
+	border-color: #8c8c8c;
+	border-width: 1px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	opacity: 0.3;
+	color: black;
+	transition: opacity 0.5s;
+}
+
+#top1 h3 {
+	background-color: rgb(115, 115, 38)
+}
+
+#top2 h3 {
+	background-color: rgb(192,192,192);
+}
+
+#top3 h3 {
+	background-color: rgb(112, 85, 41)
+}
+
+#top4 h3, #top5 h3, #top6 h3 {
+	background-color: rgb(77, 170, 179)
+}
+
+#homeRow1 .col-xs-4:hover h3 {
+	opacity: 1;
+}
+
+#homeRow2 .col-xs-4:hover h3 {
+	opacity: 1;
+}
+
+#r1, #r2, #r3, #r4, #r5, #r6 {
+	text-align: center;
+	font-size: 1vw;
+}
+
+#img1, #img2, #img3, #img4, #img5, #img6 {
+	object-fit: contain;
+	display: flex;
+	padding-left: 0vw;
+}
+
+#img1 img, #img2 img, #img3 img, #img4 img, #img5 img, #img6 img {
+	max-height: 8vw;
+	max-width: 100%;
+	object-fit: contain;
+	filter: grayscale(30%);
+	opacity: 0.7;
+	transition: filter 0.5s;
+	transition: opacity 0.5s;
+}
+
+#topImgDescrip {
+	background-image: url(/static/apitest/img/top1BG.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: 0.5;
+	filter: grayscale(100%);
+	transition: filter 0.5s;
+	transition: opacity 0.5s;
+}
+
+#homeRow1 .col-xs-4:hover #img1 img,
+#homeRow1 .col-xs-4:hover #img2 img,
+#homeRow1 .col-xs-4:hover #img3 img,
+#homeRow2 .col-xs-4:hover #img4 img,
+#homeRow2 .col-xs-4:hover #img5 img,
+#homeRow2 .col-xs-4:hover #img6 img,
+#homeRow1 .col-xs-4:hover #topImgDescrip,
+#homeRow2 .col-xs-4:hover #topImgDescrip {
+	filter: grayscale(0%);
+	opacity: 1;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RESULT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+* {
+	text-transform: capitalize;
+}
+#containerID {
+	width: 40vw;
+	text-align: center;
+}
+
+#name {
+	font-size: 2.5vw;
+}
+
+#panel1 {
+	text-align: center;
+	height: 100%;
+}
+
+#DDMenu {
+	float: left;
+}
+
+#legendListDD a {
+	color: #8c8c8c;
+}
+
+.dropdown-menu {
+   height: 13em;
+   overflow: scroll;
+}
+
+#panel3 {
+	text-align: center;
+	height: 100%;
+	margin-bottom: 1vw;
+}
+
+#rankedImgDiv {
+	padding-top: 1vw;
+	padding-bottom: 1vw;
+}
+
+#mpBio {
+}
+
+#mp1 {
+}
+
+#mp1 img {
+	max-height:10em;
+	max-width: 10em;
+}
+
+#mpData1 {
+	float: right;
+	padding-right: 1vw;
+	text-align: center;
+}
+
+#mp2 {
+}
+
+#mp2 img {
+	max-height:10em;
+	max-width: 10em;
+}
+
+#mpData2 {
+	float: right;
+	padding-right: 1vw;
+	text-align: center;
+}
+
+#rankedImgDiv {
+	background: -webkit-radial-gradient(rgba(0, 0, 0, 100), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); /* Safari 5.1 to 6.0 */
+	background: -o-radial-gradient(rgba(0, 0, 0, 100), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); /* For Opera 11.6 to 12.0 */
+	background: -moz-radial-gradient(rgba(0, 0, 0, 100), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); /* For Firefox 3.6 to 15 */
+	background: radial-gradient(rgba(0, 0, 0, 100), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); /* Standard syntax */
+}
+
+#ranked2v2InfoDiv {
+	height: 17vw;
+	max-width: 100%;
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+hr {
+	border-color: #8c8c8c;
+	width: 20vw;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LEGENDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#legendsPanel1 {
+	margin-bottom: 1vw;
+}
+
+.portrait {
+	width: 8vw;
+	margin-top: 1vw;
+	margin-bottom: 1vw;
+	filter: grayscale(85%);
+	opacity: 0.7;
+	transition: filter 0.5s;
+	transition: opacity 0.5s;
+}
+
+.portrait:hover {
+	filter: grayscale(0%);
+	opacity: 100;
+}

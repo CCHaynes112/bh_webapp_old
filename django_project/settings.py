@@ -14,8 +14,7 @@ SECRET_KEY = secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ("brawlbay.com", "www.brawlbay.com")
-
+ALLOWED_HOSTS = ("localhost", "brawlbay.com", "www.brawlbay.com")
 
 # Application definition
 

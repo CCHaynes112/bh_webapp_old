@@ -2,4 +2,7 @@ secret_keys.py
 secret_keys.pyc
 letsencrypt
 *.pyc
+*.pyc
+*.pye
+*.swp
 *.save

@@ -3,201 +3,68 @@
 
 {% block content %}
 
-	<!--<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>-->
+<div>
+	<div class="panelDark rounded text-center">
+		<img class="w-100" src="{% static 'apitest/img/HomeName.png' %}">
+		<div class="mx-auto w-50">
+			<form id="searchPlayerForm" method="get" action="ajax/getPlayer" class="form-inline py-3">
+	        	<input id="searchPlayerName" class="form-control w-75" type="search" placeholder="Name, ID" name="ident" type="text">
+	        	<button class="btn btn-outline-warning w-25" type="submit" data-toggle="modal" data-target="#playerModal"><i class="fas fa-search"></i></button>
+	        </form>
 
-	<div id="fullContain">
-		<div id="homePanel1" class="container-fluid">
-			<div id="logoNameDiv">
-				<img src="{% static 'apitest/img/HomeName.png' %}">
+			<div class="modal fade" id="playerModal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div id="playerModalbody" class="modal-body">
+			      	
+			      </div>
+			    </div>
+			  </div>
 			</div>
 
-			<div id="homeDescrip">
-				<h2><b>ANALYZE YOUR GAMEPLAY</b></h2>
-				<b>HOW TO SEARCH</b>
-				<br>
-				<br>
-				<p>To search, enter your Brawlhalla name:</p>
-			</div>
-
-			<div id="searchFormHome" class="searchForm">
-				<form class="form-group" action="/result/" method="GET">
-					<label for="ident">Name or ID:</label>
-					<input class="form-control" name="ident" type="text">
-					<br>
-					<input class="button" type="submit" value="Submit">
-				</form> 
-			</div>
-		</div>
-		
-		<div id="homeRow1">
-			<div id="homeRow1Heading">
-				<p>Top 6 Global Players:</p>
-			</div>
-			<div class="row">
-				<form id="top1" action="/result/" method="GET">
-					<input id="topVar1" type="hidden" name="ident" value="" />
-					<button class="col-xs-4" type="submit" value="Submit">
-						<div>
-							<h3>#1</h3>
-						</div>
-						<div id="topImgDescrip" class="row">
-							<div id="img1" class="col-xs-6"></div>
-							<div id="r1" class="col-xs-6"></div>
-						</div>
-					</button>
-				</form>
-
-
-				<form id="top2" action="/result/" method="GET">
-					<input id="topVar2" type="hidden" name="ident" value="" />
-					<button class="col-xs-4" type="submit" value="Submit">
-						<div>
-							<h3>#2</h3>
-						</div>
-						<div id="topImgDescrip" class="row">
-							<div id="img2" class="col-xs-6"></div>
-							<div id="r2" class="col-xs-6"></div>
-						</div>
-					</button>
-				</form>
-
-				<form id="top3" action="/result/" method="GET">
-					<input id="topVar3" type="hidden" name="ident" value="" />
-					<button class="col-xs-4" type="submit" value="Submit">
-						<div>
-							<h3>#3</h3>
-						</div>
-						<div id="topImgDescrip" class="row">
-							<div id="img3" class="col-xs-6"></div>
-							<div id="r3" class="col-xs-6"></div>
-						</div>
-					</button>
-				</form>
-
-			</div>
-		</div>
-
-
-		<div id="homeRow2">
-			<div class="row">
-				<form id="top4" action="/result/" method="GET">
-					<input id="topVar4" type="hidden" name="ident" value="" />
-					<button class="col-xs-4" type="submit" value="Submit">
-						<div>
-							<h3>#4</h3>
-						</div>
-						<div id="topImgDescrip" class="row">
-							<div id="img4" class="col-xs-6"></div>
-							<div id="r4" class="col-xs-6"></div>
-						</div>
-					</button>
-				</form>
-
-
-				<form id="top5" action="/result/" method="GET">
-					<input id="topVar5" type="hidden" name="ident" value="" />
-					<button class="col-xs-4" type="submit" value="Submit">
-						<div>
-							<h3>#5</h3>
-						</div>
-						<div id="topImgDescrip" class="row">
-							<div id="img5" class="col-xs-6"></div>
-							<div id="r5" class="col-xs-6"></div>
-						</div>
-					</button>
-				</form>
-
-				<form id="top6" action="/result/" method="GET">
-					<input id="topVar6" type="hidden" name="ident" value="" />
-					<button class="col-xs-4" type="submit" value="Submit">
-						<div>
-							<h3>#6</h3>
-						</div>
-						<div id="topImgDescrip" class="row">
-							<div id="img6" class="col-xs-6"></div>
-							<div id="r6" class="col-xs-6"></div>
-						</div>
-					</button>
-				</form>
-				
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-xs-6">
-				<div class="container-fluid" style="width: 40vw; height: 30vw; overflow: auto;">
-					<a class="twitter-timeline" href="https://twitter.com/Brawlhalla?ref_src=twsrc%5Etfw">Recent tweets by Brawlhalla</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-				</div>
-			</div>
-			<div class="col-xs-6">
-				
-			</div>
-		</div>
-
-		<div class="container-fluid" style="width: 75%; margin-top: 2vw;">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
-				</ol>
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-					<!-- KEEP IMAGES AT 1220X350 -->
-					<div class="item active">
-						<a href="http://www.brawlhalla.com/news/brawlhalla-patch-2-80/"><img src="/static/apitest/img/Banner/News1.png" alt="News1" style="width:100%;"></a>
-					</div>
-
-					<div class="item">
-						<a href="http://www.brawlhalla.com/news/brawlhalla-patch-2-79/"><img src="/static/apitest/img/Banner/News2.png" alt="News2" style="width:100%;"></a>
-					</div>
-
-					<!--<div class="item">
-						<img src="/static/apitest/img/Banner/News3.png" alt="News3" style="width:100%;">
-					</div>-->
-				</div>
-
-				<!-- Left and right controls -->
-				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
 		</div>
 	</div>
-	
 
+	<div class="panelDark rounded text-center mx-2 my-2 p-2">
+		<h3>Top 6 Players</h3>
+		<hr>
+		<div class="row mx-auto">
+			<div id="topLegend1" class="topLegendPanel col-sm-4 row mx-auto border border-dark"></div>
+
+			<div id="topLegend2" class="topLegendPanel col-sm-4 row mx-auto border border-dark"></div>
+
+			<div id="topLegend3" class="topLegendPanel col-sm-4 row mx-auto border border-dark"></div>
+		</div>
+
+		<div class="row mx-auto">
+			<div id="topLegend4" class="topLegendPanel col-sm-4 row mx-auto border border-dark"></div>
+
+			<div id="topLegend5" class="topLegendPanel col-sm-4 row mx-auto border border-dark"></div>
+
+			<div id="topLegend6" class="topLegendPanel col-sm-4 row mx-auto border border-dark"></div>
+		</div>
+	</div>
+
+	<div>
+		<div class="row mx-auto">
+			<div class="col-sm-6">
+				<a height="800" class="twitter-timeline" href="https://twitter.com/Brawlhalla?ref_src=twsrc%5Etfw">Recent tweets by Brawlhalla</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</div>
+
+			<div id="twitchContainer" class="col-sm-6"></div>
+		</div>
+	</div>
+</div>
+<head>
 	<script type="text/javascript">
-		var top3Json = JSON.parse('{{ time_series_top3_json_string | escapejs }}');
-
-		for(var i = 0; i < 6; i++)
-		{
-			document.getElementById("r" + (i+1)).innerHTML += "<p>" + top3Json[i].name + "<br>" + top3Json[i].tier + "<br>" + top3Json[i].region + "<br>Wins: "
-			 + top3Json[i].wins + "<br>Loss: " + (top3Json[i].games - top3Json[i].wins) + "</p>";
-		}
-
-		for(var i = 0; i < 6; i++)
-		{
-			var img1 = new Image(); 
-			img1.src = "/static/apitest/img/legends/" + top3Json[i].best_legend + ".png";
-			document.getElementById('img' + (i + 1)).appendChild(img1);
-		}
-
-		document.getElementById("topVar1").value = top3Json[0].name;
-		document.getElementById("topVar2").value = top3Json[1].name;
-		document.getElementById("topVar3").value = top3Json[2].name;
-		document.getElementById("topVar4").value = top3Json[3].name;
-		document.getElementById("topVar5").value = top3Json[4].name;
-		document.getElementById("topVar6").value = top3Json[5].name;
-
+		var rank1v1_json = JSON.parse('{{ rank1v1_json_string | escapejs }}');
+		console.log(rank1v1_json);
 	</script>
+	<script type="text/javascript" src="{% static 'apitest/js/Home.js' %}"></script>
+</head>
 {% endblock %}

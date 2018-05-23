@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^result', views.result, name='result'),
-	url(r'^legends', views.legends, name='legends'),
-	url(r'^about', views.about, name='about'),
+	url(r'^clans', views.clans, name='clans'),
+	url(r'^ajax/getTwitch', views.getTwitch, name='getTwitch'),
+	url(r'^ajax/getPlayer', views.getPlayer, name='getPlayer'),
 ]

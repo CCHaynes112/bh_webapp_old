@@ -3,19 +3,33 @@
   <head>
     {% load static %}
 
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" href="{% static 'apitest/img/logo3.png' %}">
     <title>BrawlBay.com</title>
     <meta http-equiv="Content-Type" content="text/html;">
-    <meta charset="utf-8">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'apitest/css/Mine/Result.css' %}">
-    <script type="text/javascript" src="{% static 'apitest/js/Mine/CallChart.js' %}"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">google.charts.load('current', {'packages':['corechart', 'bar']})</script>
+    <link rel="stylesheet" type="text/css" href="{% static 'apitest/css/Header.css' %}">
+
+    <!--Font-->
+    <link href="https://fonts.googleapis.com/css?family=Anton|Merriweather+Sans" rel="stylesheet">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!--Chart.js-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+    <!--Javascript-->
 
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83277161-1"></script>
@@ -23,75 +37,67 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-83277161-1');
     </script>
 
     <style type="text/css">
-
-      body {
-        background-image: url({% static 'apitest/img/Backgrounds/Shipwreck_BG.png' %});
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-        opacity: 50;
+      h2, h3, h4, h5, h6 {
+        font-family: 'Anton', sans-serif;
+        text-decoration: underline;
+        color: #ecc579;
       }
 
-      footer {
-        background-color: #222222;
-        color: #8c8c8c;
-        padding-top: 1vw;
-        padding-bottom: 1vw;
-        height: 3%;
-        margin-bottom: 0vw;
+      h1 {
+        font-family: 'Anton', sans-serif;
+        text-decoration: underline;
+        color: #e59e42;
       }
 
+      p {
+        font-family: 'Merriweather Sans', sans-serif;
+        font-size: 90%;
+      }
+
+      a {
+        color: #ecc579;
+        text-decoration: none;
+      }
     </style>
 
   </head>
-
   <body>
-    <nav id="navBar" class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/"><img src="{% static 'apitest/img/Logo.png' %}"></a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-          </button>
-        </div>
 
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li><a href="#">Clans</a></li>
-            <li><a href="/about/">About/Contact</a></li>
-            <li><a href="http://www.brawlhalla.com/rankings/1v1/">LeaderBoards</a></li>
-          </ul>
-          <form id="searchFormHead" class="form-group searchForm" action="/result/" method="GET">
-            <ul style="list-style-type: none;">
-              <li><input class="form-control" name="ident" type="text" placeholder="Search Player"></li>
-              <li><input class="button" type="submit" value="Submit"></li>
-            </ul>
-          </form> 
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="/">
+        <img src="{% static 'apitest/img/logo3.png' %}">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <!--<li class="nav-item">
+            <a class="nav-link" href="/clans">Clans</a>
+          </li>-->
+          <li class="nav-item">
+            <a class="nav-link" href="http://www.brawlhalla.com/rankings/1v1/">Leaderboards</a>
+          </li>
+        </ul>
       </div>
     </nav>
 
-    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-    <div id="theContain" class="container-fluid" style="padding-left: 0.25vw; padding-right: 0.25vw; padding-top: 7em; background-color: rgba(34, 34, 34, 0.5);">
+    <div id="content-wrapper">
+      <div id="content" class="mx-auto border border-dark rounded pb-3">
       {% block content %}
       {% endblock %}
-    </div>
-
-    <footer>
-      <div class="container-fluid">
-        <div>
-          <a href="http://www.curtishaynes.net/"><p style="float: right;"">Designed and Developed by Curtis Haynes</p></a>
-        </div>
       </div>
+    </div>
+    <footer>
+      <div class="text-right p-2"><a href="http://www.CurtisHaynes.net">Devevloped by Curtis Haynes</a></div>
     </footer>
   </body>
-
 </html>

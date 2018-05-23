@@ -71,12 +71,12 @@ function getPlayerInfo() {
 						document.getElementById("playerModalbody").innerHTML +=
 						`<form class="form-inline" method="get" action="/result/">
 
-							<h2 class="text-left">` + (i+1) + `.) ` + data[i].region + `:  ` + data[i].name + `</h2>
+							<h4 class="text-left">` + (i+1) + `.) ` + data[i].region + `:  ` + data[i].name + `</h4>
 							
 							<input id="playerFormSend` + i + `" type="hidden" name="ident" />
 
-							<button class="btn btn-outline-warning  float-right" type="submit" data-toggle="modal"><i class="fas fa-search"></i></button>
-						</form><br>`;
+							<button class="btn btn-outline-warning w-100 float-right" type="submit" data-toggle="modal"><i class="fas fa-search"></i></button>
+						</form><br><hr>`;
 						document.getElementById('playerFormSend' + i).value = data[i].brawlhalla_id;
 					}
 				}

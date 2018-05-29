@@ -125,7 +125,7 @@ function populateRanked() {
 	fragment.appendChild(elem);
 
 	elem = document.createElement('p');
-	elem.innerText = "Current Rating: " + rankedJson.current_rating;
+	elem.innerText = "Current Rating: " + rankedJson.rating;
 	fragment.appendChild(elem);
 
 	elem = document.createElement('p');

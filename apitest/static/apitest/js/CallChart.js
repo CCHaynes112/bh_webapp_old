@@ -19,6 +19,10 @@ function createWinLossChart(elementId, wins, loss) {
 	        }]
 	    },
 	    options: {
+	    	title: {
+	    		display: true,
+	    		text: Math.round((wins / (wins+loss)) * 100) + '%'
+	    	},
 	    	tooltips: {
 	    		titleFontSize: 12,
 	    		bodyFontSize:  12

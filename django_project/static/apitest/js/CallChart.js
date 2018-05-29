@@ -20,8 +20,8 @@ function createWinLossChart(elementId, wins, loss) {
 	    },
 	    options: {
 	    	tooltips: {
-	    		titleFontSize: 20,
-	    		bodyFontSize:  20
+	    		titleFontSize: 12,
+	    		bodyFontSize:  12
 	    	},
 	    	legend: {
 	    		display: false
@@ -52,8 +52,8 @@ function createDamageChart1(elementId, dmgGiven, dmgTaken) {
 	    },
 	    options: {
 	    	tooltips: {
-	    		titleFontSize: 15,
-	    		bodyFontSize:  15
+	    		titleFontSize: 12,
+	    		bodyFontSize:  12
 	    	},
 	    	legend: {
 	    		display: false
@@ -96,8 +96,8 @@ function createDamageChart2(elementId, primary, secondary, unarmed, gadget, thro
 	    },
 	    options: {
 	    	tooltips: {
-	    		titleFontSize: 20,
-	    		bodyFontSize:  20
+	    		titleFontSize: 12,
+	    		bodyFontSize:  12
 	    	},
 	    	legend: {
 	    		display: false

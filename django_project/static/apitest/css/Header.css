@@ -16,6 +16,7 @@
 /* Content */
 body {
 	padding-top: 70px;
+	text-transform: capitalize;
 }
 
 img {

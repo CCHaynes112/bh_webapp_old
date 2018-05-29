@@ -6,10 +6,10 @@ function loadTop6() {
 		</div>
 		<div class="col-xs-6 text-center w-50">
 			<p class="font-weight-bold">` + rank1v1_json[i].name + `</p>
-			<p>` + rank1v1_json[i].tier + `</p>
+			<p>Rating: ` + rank1v1_json[i].rating + `</p>
 			<p>` + rank1v1_json[i].region + `</p>
-			<p>Wins:` + rank1v1_json[i].wins + `</p>
-			<p>Lost:` + (rank1v1_json[i].games - rank1v1_json[i].wins) + `</p>
+			<p>Wins: ` + rank1v1_json[i].wins + `</p>
+			<p>Losses: ` + (rank1v1_json[i].games - rank1v1_json[i].wins) + `</p>
 		</div>`;
 	}
 

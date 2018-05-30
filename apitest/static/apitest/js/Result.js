@@ -14,11 +14,12 @@ function populateTitle() {
 function populateOverview() {
 	document.getElementById('playerLevel').innerHTML = "Level: " + playerJson.level
 
-	createWinLossChart('overviewWinLoss', playerJson.wins, (playerJson.games - playerJson.wins));
+	//Typically a legend goes here
+	createWinLossChart('overviewWinLoss', playerJson);
 }
 
 function populateMostPlayed() {
-	//Sorts legends matchtime
+	//Sorts legends by matchtime
 	playerJson.legends.sort(function(a, b) {
 		return b.matchtime - a.matchtime;
 	});
@@ -58,11 +59,11 @@ function populateMostPlayed() {
 
 	document.getElementById('mp1').appendChild(fragment);
 
-	createWinLossChart('mp1WL', mpLegend1.wins, (mpLegend1.games - mpLegend1.wins));
+	createWinLossChart('mp1WL', mpLegend1);
 
-	createDamageChart1('mp1DB1', mpLegend1.damagedealt, mpLegend1.damagetaken);
+	createDamageChart1('mp1DB1', mpLegend1);
 
-	createDamageChart2('mp1DB2', mpLegend1.damageweaponone, mpLegend1.damageweapontwo, mpLegend1.damageunarmed, mpLegend1.damagegadgets, mpLegend1.damagethrown);
+	createDamageChart2('mp1DB2', mpLegend1);
 
 
 	//Create elements for Most Played 1
@@ -97,11 +98,11 @@ function populateMostPlayed() {
 
 	document.getElementById('mp2').appendChild(fragment);
 
-	createWinLossChart('mp2WL', mpLegend2.wins, (mpLegend2.games - mpLegend2.wins));
+	createWinLossChart('mp2WL', mpLegend2);
 
-	createDamageChart1('mp2DB1', mpLegend2.damagedealt, mpLegend2.damagetaken);
+	createDamageChart1('mp2DB1', mpLegend2);
 
-	createDamageChart2('mp2DB2', mpLegend2.damageweaponone, mpLegend2.damageweapontwo, mpLegend2.damageunarmed, mpLegend2.damagegadgets, mpLegend2.damagethrown);
+	createDamageChart2('mp2DB2', mpLegend2);
 }
 
 function populateRanked() {
@@ -201,11 +202,11 @@ function populateAllLegends() {
 				</div>
 				`
 
-				createWinLossChart('legendBoxWL', playerJson.legends[i].wins, (playerJson.legends[i].games - playerJson.legends[i].wins));
+				createWinLossChart('legendBoxWL', playerJson.legends[i]);
 
-				createDamageChart1('legendBoxD1', playerJson.legends[i].damagedealt, playerJson.legends[i].damagetaken);
+				createDamageChart1('legendBoxD1', playerJson.legends[i]);
 
-				createDamageChart2('legendBoxD2', playerJson.legends[i].damageweaponone, playerJson.legends[i].damageweapontwo, playerJson.legends[i].damageunarmed, playerJson.legends[i].damagegadgets, playerJson.legends[i].damagethrown);
+				createDamageChart2('legendBoxD2', playerJson.legends[i]);
 				break;
 			}
 		}
@@ -213,11 +214,11 @@ function populateAllLegends() {
 
 	createLegendInfo(2, 'legendsBox', 'w-25', true);
 
-	createWinLossChart('legendBoxWL', playerJson.legends[2].wins, (playerJson.legends[2].games - playerJson.legends[2].wins));
+	createWinLossChart('legendBoxWL', playerJson.legends[2]);
 
-	createDamageChart1('legendBoxD1', playerJson.legends[2].damagedealt, playerJson.legends[2].damagetaken);
+	createDamageChart1('legendBoxD1', playerJson.legends[2]);
 
-	createDamageChart2('legendBoxD2', playerJson.legends[2].damageweaponone, playerJson.legends[2].damageweapontwo, playerJson.legends[2].damageunarmed, playerJson.legends[2].damagegadgets, playerJson.legends[2].damagethrown);
+	createDamageChart2('legendBoxD2', playerJson.legends[2]);
 }
 
 

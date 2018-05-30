@@ -75,6 +75,48 @@
 	<script type="text/javascript">
 		var playerJson = JSON.parse('{{ player_json_string | escapejs }}');
 		var rankedJson = JSON.parse('{{ ranked_json_string | escapejs }}');
+
+		legendWeapons = {
+			3: ["Hammer", "Sword"],
+			4: ["Blasters", "Hammer"],
+			5: ["RocketLance", "Spear"],
+			6: ["RocketLance", "Blasters"],
+			7: ["Hammer", "Spear"],
+			8: ["Spear", "Katar"],
+			9: ["Katar", "Blasters"],
+			10: ["Sword", "Spear"],
+			11: ["RocketLance", "Sword"],
+			12: ["Hammer", "RocketLance"],
+			13: ["Sword", "Blasters"],
+			14: ["Blasters", "Spear"],
+			15: ["Hammer", "Katar"],
+			16: ["Axe", "Hammer"],
+			18: ["Bow", "Katar"],
+			19: ["Axe", "Spear"],
+			20: ["Katar", "Sword"],
+			21: ["Axe", "Blasters"],
+			22: ["Axe", "RocketLance"],
+			23: ["Bow", "Axe"],
+			24: ["Bow", "Sword"],
+			25: ["Bow", "Blasters"],
+			26: ["Axe", "Sword"],
+			28: ["Gauntlets", "Hammer"],
+			29: ["Gauntlets", "Spear"],
+			30: ["Gauntlets", "Sword"],
+			31: ["Katar", "Axe"],
+			32: ["Blasters", "Gauntlets"],
+			33: ["Scythe", "Spear"],
+			34: ["Scythe", "Blasters"],
+			35: ["Scythe", "Gauntlets"],
+			36: ["Bow", "Hammer"],
+			37: ["RocketLance", "Scythe"],
+			38: ["Gauntlets", "Katar"],
+			39: ["Cannon", "Sword"],
+			40: ["Cannon", "Axe"],
+			41: ["Cannon", "Blasters"],
+			42: ["Spear", "bow"],
+			43: ["Sword", "Scythe"],
+		};
 	</script>
 	<script type="text/javascript" src="{% static 'apitest/js/CallChart.js' %}"></script>
 	<script type="text/javascript" src="{% static 'apitest/js/Result.js' %}"></script>

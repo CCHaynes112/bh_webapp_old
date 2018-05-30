@@ -1,12 +1,13 @@
-function createWinLossChart(elementId, wins, loss) {
+function createWinLossChart(elementId, legend) {
 	var ctx = document.getElementById(elementId).getContext('2d');
+	var loss = (legend.games - legend.wins);
 	var chart = new Chart(ctx, {
 	    type: 'doughnut',
 	    data: {
 	        labels: ["Win", "Loss"],
 	        datasets: [{
 	            label: 'Win-Loss',
-	            data: [wins, loss],
+	            data: [legend.wins, loss],
 	            backgroundColor: [
 	                'rgba(54, 162, 235, 0.2)',
 	                'rgba(255, 99, 132, 0.2)'
@@ -21,7 +22,7 @@ function createWinLossChart(elementId, wins, loss) {
 	    options: {
 	    	title: {
 	    		display: true,
-	    		text: Math.round((wins / (wins+loss)) * 100) + '%'
+	    		text: Math.round((legend.wins / (legend.wins+loss)) * 100) + '%'
 	    	},
 	    	tooltips: {
 	    		titleFontSize: 12,
@@ -34,7 +35,7 @@ function createWinLossChart(elementId, wins, loss) {
 	});
 }
 
-function createDamageChart1(elementId, dmgGiven, dmgTaken) {
+function createDamageChart1(elementId, legend) {
 	var ctx = document.getElementById(elementId).getContext('2d');
 	var myChart = new Chart(ctx, {
 	    type: 'bar',
@@ -42,7 +43,7 @@ function createDamageChart1(elementId, dmgGiven, dmgTaken) {
 	        labels: ["Damage Given", "Damage Taken"],
 	        datasets: [{
 	            label: 'Damage',
-	            data: [dmgGiven, dmgTaken],
+	            data: [legend.damagedealt, legend.damagetaken],
 	            backgroundColor: [
 	                'rgba(54, 162, 235, 0.2)',
 	                'rgba(255, 99, 132, 0.2)'
@@ -71,15 +72,15 @@ function createDamageChart1(elementId, dmgGiven, dmgTaken) {
 	});
 }
 
-function createDamageChart2(elementId, primary, secondary, unarmed, gadget, thrown) {
+function createDamageChart2(elementId, legend) {
 	var ctx = document.getElementById(elementId).getContext('2d');
 	var myChart = new Chart(ctx, {
 	    type: 'pie',
 	    data: {
-	        labels: ["Primary", "Secondary", "Unarmed", "Gadget", "Thrown"],
+	        labels: [legendWeapons[legend.legend_id][0], legendWeapons[legend.legend_id][1], "Unarmed", "Gadget", "Thrown"],
 	        datasets: [{
 	            label: 'Damage by Item',
-	            data: [primary, secondary, unarmed, gadget, thrown],
+	            data: [legend.damageweaponone, legend.damageweapontwo, legend.damageunarmed, legend.damagegadgets, legend.damagethrownitem],
 	            backgroundColor: [
 	                'rgba(54, 162, 235, 0.2)',
 	                'rgba(255, 99, 132, 0.2)',

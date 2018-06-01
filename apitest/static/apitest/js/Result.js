@@ -1,3 +1,7 @@
+function createTitle() {
+	document.title = playerJson.name;
+}
+
 function populateTitle() {
 	var fragment = document.createDocumentFragment();
 	var elem = document.createElement('h1');
@@ -223,6 +227,7 @@ function populateAllLegends() {
 
 
 $(document).ready(function() {
+	createTitle();
 	populateTitle();
 	populateOverview();
 	populateMostPlayed();

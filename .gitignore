@@ -1,11 +1,11 @@
 secret_keys.py
 secret_keys.pyc
 letsencrypt
-*.pyc
-*.pyc
 *.pye
 *.swp
 *.save
+django_project/static/
+
 
 # Created by https://www.gitignore.io/api/django
 # Edit at https://www.gitignore.io/?templates=django
